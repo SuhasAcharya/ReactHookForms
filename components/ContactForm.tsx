@@ -3,7 +3,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { TextField } from "@mui/material";
 
 interface ContactFormProps {
   name: string;
@@ -40,15 +40,17 @@ const ContactForm: React.FC = () => {
         <div className="flex gap-x-4 justify-center items-center">
           <label htmlFor="name">Name:</label>
           <Controller
-            name="name"
-            control={control}
-            defaultValue=""
+            name="name" // field name
+            control={control} // react-hook-form control instance
+            defaultValue="" // initial value
+            rules={{ required: true }} // validation rules
             render={({ field }) => (
-              <input
+              <TextField
+                {...field}
+                label="name"
                 className={`${
                   errors.name && `border-[1px] border-red-600`
-                }  p-4 h-[40px] w-[70vh] rounded-[8px] border-[1px] border-gray-400 focus:outline-none`}
-                {...field}
+                }h-[40px] w-[70vh] rounded-[8px] border-[1px] border-gray-400 focus:outline-none`}
               />
             )}
           />
